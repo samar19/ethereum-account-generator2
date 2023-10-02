@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { getAbstractAddress } from './EtherspotInitializer';
 import TransferFundsButton from './TransferFundsButton';
+import TransferERC20Button from './TransferERC20Button'; // Add this line
 
 function App() {
   const [account, setAccount] = useState(null);
@@ -28,7 +29,8 @@ function App() {
         <div className="mt-4 text-center">
           <h2 className="text-xl font-bold">Generated Account</h2>
           <p>Address: {account.address}</p>
-          <TransferFundsButton /> {/* Include TransferFundsButton component */}
+          <TransferFundsButton />
+          <TransferERC20Button /> {/* Include TransferERC20Button component */}
         </div>
       )}
     </div>

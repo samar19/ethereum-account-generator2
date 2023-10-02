@@ -1371,7 +1371,7 @@
 
 "@etherspot/prime-sdk@^1.2.11":
   version "1.2.11"
-  resolved "https://registry.npmjs.org/@etherspot/prime-sdk/-/prime-sdk-1.2.11.tgz"
+  resolved "https://registry.yarnpkg.com/@etherspot/prime-sdk/-/prime-sdk-1.2.11.tgz#b052faa671eb787adbd4ee416b75260dd0c5e8b9"
   integrity sha512-TxCNUjZd5RVHosPOhDrunpSZLJN5+PQpe5mZGU2wK/ahY+pKE8JhM6sedCvla49d48+afq0ucCzKXrKJOZizvA==
   dependencies:
     "@apollo/client" "3.4.0"
