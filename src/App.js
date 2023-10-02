@@ -1,27 +1,17 @@
 import React, { useState } from 'react';
-import { primeSdk, getAbstractAddress } from './EtherspotInitializer';
+import { getAbstractAddress } from './EtherspotInitializer';
 
 function App() {
   const [account, setAccount] = useState(null);
 
   const createNewAccount = async () => {
     try {
-      const wallet = await primeSdk.createWallet();
+      const address = await getAbstractAddress();
       setAccount({
-        address: wallet.address,
-        privateKey: wallet.privateKey
+        address: address,
       });
     } catch (error) {
       console.error(`Error creating user: ${error.message}`);
-    }
-  };
-
-  const fetchAbstractAddress = async () => {
-    try {
-      const address = await getAbstractAddress();
-      console.log('Abstract Address:', address);
-    } catch (error) {
-      console.error(`Error fetching abstract address: ${error.message}`);
     }
   };
 
@@ -33,17 +23,10 @@ function App() {
       >
         New Account
       </button>
-      <button
-        className="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded mt-4"
-        onClick={fetchAbstractAddress}
-      >
-        Fetch Abstract Address
-      </button>
       {account && (
         <div className="mt-4 text-center">
           <h2 className="text-xl font-bold">Generated Account</h2>
           <p>Address: {account.address}</p>
-          <p>Private Key: {account.privateKey}</p>
         </div>
       )}
     </div>
