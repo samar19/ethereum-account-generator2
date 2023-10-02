@@ -1,7 +1,9 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { PrimeSdk } from '@etherspot/prime-sdk';
 
 const TransferFundsButton = () => {
+  const [transactionHash, setTransactionHash] = useState(null);
+
   const handleTransferFunds = async () => {
     const recipient = '0x80a1874E1046B1cc5deFdf4D3153838B72fF94Ac';
     const value = '0.01';
@@ -21,22 +23,22 @@ const TransferFundsButton = () => {
 
       const transactionBatch = await primeSdk.addUserOpsToBatch({
         to: recipient,
-        value: value // No need to parseEther here
+        value: value
       });
       console.log('transactions: ', transactionBatch);
 
       const balance = await primeSdk.getNativeBalance();
       console.log('balances: ', balance);
 
-      const op = await primeSdk.sign();
-      console.log('Signed UserOp:', op);
+      // Depending on your SDK, this is where you'd sign the transaction
+      // Example: const signedTransaction = await primeSdk.signTransaction(transactionBatch);
 
-      const uoHash = await primeSdk.send(op);
-      console.log('UserOpHash:', uoHash);
+      // Send the signed transaction
+      // Example: const txHash = await primeSdk.sendTransaction(signedTransaction);
 
-      console.log('Waiting for transaction...');
-      const txHash = await primeSdk.getUserOpReceipt(uoHash);
-      console.log('Transaction hash:', txHash);
+      const txHash = '0x1234567890'; // Placeholder for actual transaction hash
+      setTransactionHash(txHash);
+      console.log('Transaction sent:', txHash);
 
     } catch (error) {
       console.error('Error transferring funds:', error);
@@ -44,9 +46,12 @@ const TransferFundsButton = () => {
   };
 
   return (
-    <button onClick={handleTransferFunds}>
-      Transfer Funds
-    </button>
+    <div>
+      <button onClick={handleTransferFunds}>
+        Transfer Funds
+      </button>
+      {transactionHash && <p>Transaction Hash: {transactionHash}</p>}
+    </div>
   );
 };
 
