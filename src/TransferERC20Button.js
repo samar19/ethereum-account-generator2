@@ -1,5 +1,5 @@
 import React from 'react';
-import { createEtherspotSdk } from '@etherspot/etherspot';
+import { PrimeSdk } from '@etherspot/prime-sdk';
 
 const TransferERC20Button = () => {
   const handleTransferERC20 = async () => {
@@ -8,32 +8,32 @@ const TransferERC20Button = () => {
     const tokenAddress = '0x326C977E6efc84E512bB9C30f76E30c160eD06FB';
 
     try {
-      const sdk = createEtherspotSdk({
-        privateKey: process.env.REACT_APP_WALLET_PRIVATE_KEY,
-        network: 'matic' // Adjust this based on your network
-      });
+      const primeSdk = new PrimeSdk(
+        { privateKey: process.env.REACT_APP_WALLET_PRIVATE_KEY },
+        { chainId: Number(process.env.REACT_APP_CHAIN_ID) }
+      );
 
-      console.log('address: ', sdk.wallet.address);
+      console.log('address: ', primeSdk.state.walletAddress);
 
-      const transactionData = sdk.contract.createTokenTransaction({
+      const transactionData = primeSdk.contract.createTokenTransaction({
         to: tokenAddress,
         functionName: 'transfer',
-        args: [recipient, sdk.utils.parseUnits(value, 18)] // Assuming 18 decimals, adjust as needed
+        args: [recipient, primeSdk.utils.parseUnits(value, 18)]
       });
 
-      const userOp = await sdk.createTransaction({
+      const userOp = await primeSdk.createTransaction({
         to: tokenAddress,
         data: transactionData
       });
 
       console.log('UserOp:', userOp);
 
-      const uoHash = await sdk.sendTransaction(userOp);
+      const uoHash = await primeSdk.sendTransaction(userOp);
 
       console.log('UserOpHash:', uoHash);
 
       console.log('Waiting for transaction...');
-      const txReceipt = await sdk.waitForTransaction(uoHash);
+      const txReceipt = await primeSdk.waitForTransaction(uoHash);
       console.log('Transaction Receipt:', txReceipt);
 
     } catch (error) {
