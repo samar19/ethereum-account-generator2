@@ -1371,7 +1371,7 @@
 
 "@etherspot/prime-sdk@^1.2.11":
   version "1.2.11"
-  resolved "https://registry.yarnpkg.com/@etherspot/prime-sdk/-/prime-sdk-1.2.11.tgz#b052faa671eb787adbd4ee416b75260dd0c5e8b9"
+  resolved "https://registry.npmjs.org/@etherspot/prime-sdk/-/prime-sdk-1.2.11.tgz"
   integrity sha512-TxCNUjZd5RVHosPOhDrunpSZLJN5+PQpe5mZGU2wK/ahY+pKE8JhM6sedCvla49d48+afq0ucCzKXrKJOZizvA==
   dependencies:
     "@apollo/client" "3.4.0"
@@ -11416,6 +11416,13 @@ ts-interface-checker@^0.1.9:
   version "0.1.13"
   resolved "https://registry.npmjs.org/ts-interface-checker/-/ts-interface-checker-0.1.13.tgz"
   integrity sha512-Y/arvbn+rrz3JCKl9C4kVNfTfSm2/mEp5FSz5EsZSANGPSlQrpRI5M4PKF+mJnE52jOO90PnPSc3Ur3bTQw0gA==
+
+ts-invariant@^0.10.3:
+  version "0.10.3"
+  resolved "https://registry.npmjs.org/ts-invariant/-/ts-invariant-0.10.3.tgz"
+  integrity sha512-uivwYcQaxAucv1CzRp2n/QdYPo4ILf9VXgH19zEIjFx2EJufV16P0JtJVpYHy89DItG6Kwj2oIUjrcK5au+4tQ==
+  dependencies:
+    tslib "^2.1.0"
 
 ts-invariant@^0.4.0:
   version "0.4.4"
