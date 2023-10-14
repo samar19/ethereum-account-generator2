@@ -2,8 +2,6 @@ import React, { useState } from 'react';
 import { PrimeSdk } from '@etherspot/prime-sdk';
 import { parseUnits } from '@etherspot/prime-sdk';
 
-
-
 const TransferERC20Button = () => {
   const [address, setAddress] = useState('');
 
@@ -13,7 +11,7 @@ const TransferERC20Button = () => {
       const primeSdk = new PrimeSdk(
         {
           privateKey: process.env.REACT_APP_WALLET_PRIVATE_KEY,
-          network: 'matic', // Adjust this based on your network
+          network: 'goerli', // Change to 'goerli' for Goerli network
         },
         {
           chainId: Number(process.env.REACT_APP_CHAIN_ID),
@@ -26,7 +24,7 @@ const TransferERC20Button = () => {
       // Step 2: Transfer ERC20 tokens to Address A
       const recipient = newAddress;
       const value = primeSdk.utils.parseUnits('0.1', 18); // Adjust value and decimals as needed
-      const tokenAddress = '0x326C977E6efc84E512bB9C30f76E30c160eD06FB';
+      const tokenAddress = '0x655F2166b0709cd575202630952D71E2bB0d61Af';
 
       const transactionData = primeSdk.contract.createTokenTransaction({
         to: tokenAddress,

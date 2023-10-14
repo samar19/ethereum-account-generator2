@@ -36,7 +36,7 @@ const TransferFundsButton = () => {
       // Send the signed transaction
       // Example: const txHash = await primeSdk.sendTransaction(signedTransaction);
 
-      const txHash = '0x1234567890'; // Placeholder for actual transaction hash
+      const txHash = '0x4944a57ba44a196c33c3e6aab4f80725693c0acbbff1731286fa14285941f90c'; // Placeholder for actual transaction hash
       setTransactionHash(txHash);
       console.log('Transaction sent:', txHash);
 
