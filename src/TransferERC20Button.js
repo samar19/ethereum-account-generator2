@@ -1,17 +1,15 @@
 import React, { useState } from 'react';
-import { PrimeSdk } from '@etherspot/prime-sdk';
-import { parseUnits } from '@etherspot/prime-sdk';
+import { PrimeSdk, parseUnits } from '@etherspot/prime-sdk';
 
 const TransferERC20Button = () => {
   const [address, setAddress] = useState('');
 
   const handleTransferERC20 = async () => {
     try {
-      // Step 1: Get a new address (Address A)
       const primeSdk = new PrimeSdk(
         {
           privateKey: process.env.REACT_APP_WALLET_PRIVATE_KEY,
-          network: 'goerli', // Change to 'goerli' for Goerli network
+          network: 'goerli',
         },
         {
           chainId: Number(process.env.REACT_APP_CHAIN_ID),
@@ -21,28 +19,30 @@ const TransferERC20Button = () => {
       const newAddress = await primeSdk.getCounterFactualAddress();
       setAddress(newAddress);
 
-      // Step 2: Transfer ERC20 tokens to Address A
       const recipient = newAddress;
-      const value = primeSdk.utils.parseUnits('0.1', 18); // Adjust value and decimals as needed
+      const value = parseUnits('0.1', 18); // Corrected this line
+
       const tokenAddress = '0x655F2166b0709cd575202630952D71E2bB0d61Af';
 
       const transactionData = primeSdk.contract.createTokenTransaction({
         to: tokenAddress,
         functionName: 'transfer',
-        args: [recipient, value]
+        args: [recipient, value],
       });
 
       const userOp = await primeSdk.createTransaction({
         to: tokenAddress,
-        data: transactionData
+        data: transactionData,
       });
 
       const uoHash = await primeSdk.sendTransaction(userOp);
 
-      // Step 3: Check the balance of Address A
-      const balance = await primeSdk.contract.readContract(tokenAddress, 'balanceOf', recipient);
+      const balance = await primeSdk.contract.readContract(
+        tokenAddress,
+        'balanceOf',
+        recipient
+      );
       console.log(`Balance of Address A (${recipient}):`, balance.toString());
-
     } catch (error) {
       console.error('Error transferring ERC20:', error);
     }
@@ -50,7 +50,9 @@ const TransferERC20Button = () => {
 
   return (
     <div>
-      <button onClick={handleTransferERC20}>Transfer ERC20 to New Address</button>
+      <button onClick={handleTransferERC20}>
+        Transfer ERC20 to New Address
+      </button>
       {address && <div>Address A: {address}</div>}
     </div>
   );
